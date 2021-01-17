@@ -86,8 +86,11 @@ class Main:
         self.debug = False
         self.screen = pygame.display.set_mode([self.width, self.height])
         self.clock = pygame.time.Clock()
-
-        self.states = { "menu": MenuState(self), "game": GameState(self) } 
+        self.width = 1366
+        self.height = 768
+        self.target_fps = 60
+        
+        self.states = { "menu": MenuState(self), "game": GameState(self) } #TODO: Add more states
         self.currentState = self.states["menu"]
 
         while(self.running):
@@ -96,35 +99,6 @@ class Main:
 
         self.quit()
         return
-
-
-    def load_from_config(self):
-        """
-        Called during the pregame phase - loads all values needed from the config file.
-
-        Parameters
-        ----------
-        None
-
-
-        Raises
-        ----------
-        None
-
-
-        Authors
-        ----------
-        Nausher Rao
-        """ 
-
-        logging.info("Loading data from configuration file")
-        with open("properties.yaml", 'r') as file:
-            data = yaml.load(file, Loader = yaml.FullLoader)
-            self.width = data["width"]
-            self.height = data["height"]
-            self.targetFps = data["targetFps"]
-
-        return 
 
 
     def tick(self):
@@ -169,7 +143,7 @@ class Main:
                 continue
 
         self.currentState.update()
-        self.clock.tick(self.targetFps)
+        self.clock.tick(self.target_fps)
         return 
 
 
