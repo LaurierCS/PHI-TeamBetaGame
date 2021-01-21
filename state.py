@@ -46,7 +46,6 @@ class State:
 
     """
     
-    
     def __init__(self):
         """
         Called on program initialisation to load everything needed by this game state.
