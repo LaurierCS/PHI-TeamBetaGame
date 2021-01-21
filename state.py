@@ -45,7 +45,6 @@ class State:
         Mouse moved.
 
     """
-
     
     def __init__(self):
         """

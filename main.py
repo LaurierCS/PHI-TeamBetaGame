@@ -32,7 +32,7 @@ class Main:
     states : dict[State]
         Stores every state that 
 
-    currentState: State
+    current_state: State
         The current State managed by the Game State Manager.
 
 
@@ -78,14 +78,15 @@ class Main:
         
         self.running = True
         self.debug = False
-        self.width = 1920
-        self.height = 1080
         self.screen = pygame.display.set_mode([self.width, self.height])
         self.clock = pygame.time.Clock()
-
-        self.states = {77} 
-        self.currentState = self.states[""]
-
+        self.width = 1366
+        self.height = 768
+        self.target_fps = 60
+        
+        self.states = {} #TODO: Add more states
+        self.current_state = None; #TODO: Set state as soon as we have some states 
+        
         while(self.running):
             self.tick()
             self.render()
@@ -121,22 +122,22 @@ class Main:
                 if(event.key == pygame.K_h):
                     self.debug = not self.debug
 
-                self.currentState.key_down(event.key)
+                self.current_state.key_down(event.key)
 
             elif(event.type == pygame.KEYUP):
-                self.currentState.key_up(event.key)
+                self.current_state.key_up(event.key)
 
             elif(event.type == pygame.MOUSEBUTTONDOWN):
-                self.currentState.mouse_down()
+                self.current_state.mouse_down()
 
             elif(event.type == pygame.MOUSEBUTTONUP):
-                self.currentState.mouse_up()
+                self.current_state.mouse_up()
 
             else:
                 continue
 
-        self.currentState.update()
-        self.clock.tick(self.targetFps)
+        self.current_state.update()
+        self.clock.tick(self.target_fps)
         return 
 
 
@@ -160,7 +161,7 @@ class Main:
         """ 
         
         self.screen.fill((0, 0, 0))
-        self.currentState.render()
+        self.current_state.render()
         if(self.debug):
             print('debug')
             #TODO: Draw debug info
