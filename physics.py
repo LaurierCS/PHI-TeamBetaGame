@@ -40,9 +40,6 @@ class Physics():
         ----------
         Branden Wheeler
         """ 
-
-        pygame.sprite.Sprite.__init__(self)
-
         self.maxSpeed = maxSpeed
         self.xAccel = xAccel
         self.yAccel = yAccel
