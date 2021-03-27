@@ -69,6 +69,7 @@ class Physics():
         Authors
         ----------
         Branden Wheeler
+        Mathuran Mangaleswaran
         """
 
         if(self.maxSpeed > abs(player.xVel) > 0):
@@ -76,6 +77,19 @@ class Physics():
 
         if (player.jumping or player.falling):
             player.yVel -= self.yAccel
+            
+
+        # Check if tile speed is equal to player speed if not slowly change it to the tiles speed
+        if (self.maxSpeed == water_speed and player.xVel != water_speed):
+            if player.xVel > water_speed:
+                player.xVel -= self.xAccel
+            elif player.xVel < water_speed:
+                player.xVel += self.xAccel
+        if (self.maxSpeed == air_speed and player.xVel != air_speed):
+            if player.xVel > air_speed:
+                player.xVel -= self.xAccel
+            elif player.xVel < air_speed:
+                player.xVel += self.xAccel
 
 
 
@@ -97,4 +111,16 @@ class Physics():
         ----------
         Branden Wheeler
         """ 
+        #This will change depending on how we want enemies to act under certain situations but for now is similar as player
+
+        if (self.maxSpeed == water_speed and enemies.xVel != water_speed):
+            if enemies.xVel > water_speed:
+                enemies.xVel -= self.xAccel
+            elif enemies.xVel < water_speed:
+                enemies.xVel += self.xAccel
+        if (self.maxSpeed == air_speed and enemies.xVel != air_speed):
+            if enemies.xVel > air_speed:
+                enemies.xVel -= self.xAccel
+            elif enemies.xVel < air_speed:
+                enemies.xVel += self.xAccel
 
