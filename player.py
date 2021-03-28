@@ -62,6 +62,8 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
         self.falling = True
 
+        self.rect = self.image.get_rect()
+
 
     def set_location(self, x, y):
 
