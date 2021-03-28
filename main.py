@@ -6,6 +6,10 @@ import yaml
 
 from state import State
 
+#Sprites
+from enemy import Enemy
+from player import Player
+
 class Main:
     """
     The main code for the game. 
@@ -86,7 +90,17 @@ class Main:
         
         self.states = {} #TODO: Add more states
         self.current_state = None; #TODO: Set state as soon as we have some states 
-        
+
+        #Create group for sprites
+        self.sprite_group = pygame.sprite.Group()
+
+        #Initialize player and enemy objects; add to group
+        self.player = Player()
+        self.enemy = Enemy()
+
+        self.sprite_group.add(self.player)
+        self.sprite_group.add(self.enemy)
+
         while(self.running):
             self.tick()
             self.render()
