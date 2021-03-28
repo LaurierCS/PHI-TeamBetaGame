@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         State update.
     """
 
-    def __init__(self, x, y, vel):
+    def __init__(self, x, y):
 
         """
         Initialization of all variables and Sprite.
@@ -39,7 +39,6 @@ class Player(pygame.sprite.Sprite):
         ----------
         x - horizontal location
         y - vertical location
-        vel - velocity of player
 
         Raises
         ----------
@@ -52,8 +51,13 @@ class Player(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
 
-        self.location = location
-        self.vel = vel
+        self.location = (x,y) 
+
+        #Player should be immobile on initialization
+        self.xVel = 0
+        self.yVel = 0
+        self.xAccel = 0
+        self.yAccel = 0
 
         self.jumping = False
         self.falling = True
@@ -81,7 +85,6 @@ class Player(pygame.sprite.Sprite):
         #Start
         self.x = x
         self.y = y
-        self.xVel = 0
 
         return 
 
@@ -150,10 +153,10 @@ class Player(pygame.sprite.Sprite):
 
         #Horizontal
         if key[pygame.K_LEFT]:
-            self.xVel = -self.vel
+            self.xVel = -self.xVel
 
         elif key[pygame.K_RIGHT]:
-            self.xVel = self.vel
+            self.xVel = self.xVel
 
         else:
             self.xVel = 0
@@ -163,10 +166,10 @@ class Player(pygame.sprite.Sprite):
             self.jumping = True
         
         if self.jumping:
-            self.y -= self.vel
+            self.y -= self.yVel
 
         elif self.falling:
-            self.y += self.vel
+            self.y += self.yVel
         
         return
 
