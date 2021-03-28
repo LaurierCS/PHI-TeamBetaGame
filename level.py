@@ -169,3 +169,27 @@ class Level():
         Jon O'Brien
         """
         surface.blit(self.level_surface, (0, 0))
+
+    def get_position_tile(self, x, y):
+        """
+        Draw level surface onto the game window
+
+        Parameters
+        ----------
+        x - an x coordinate based in pixels
+        y - a y coordinate based in pixels
+
+        Raises
+        ----------
+        None
+
+        Returns
+        ----------
+        Tile corresponding to the given x, y coordinate
+
+        Authors
+        ----------
+        Branden Wheeler
+        """
+        return self.tiles[x//self.tile_size][y//self.tile_size]
+
