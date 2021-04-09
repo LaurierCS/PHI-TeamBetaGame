@@ -1,5 +1,6 @@
 from tile import Tile
 import pygame
+from physics import Physics
 
 
 class Level():
@@ -120,12 +121,12 @@ class Level():
         for row in level:
             x = 0
             for tile in row:
-                if tile == 'value of tile':
-                    tiles.append(Tile('image file', x *
-                                      self.tile_size, y * self.tile_size, None))
-                elif tile == 'another value':
-                    tiles.append(Tile('image file', x *
-                                      self.tile_size, y * self.tile_size, None))
+                if tile == 0:
+                    tiles.append(Tile('Ground image name here', x *
+                                      self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
+                elif tile == 1:
+                    tiles.append(Tile('Another tile image name here', x *
+                                      self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
                 x += 1
             y += 1
 

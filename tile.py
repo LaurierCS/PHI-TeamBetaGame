@@ -21,7 +21,7 @@ class Tile(pygame.sprite.Sprite):
 
     """
 
-    def __init__(self, image, x, y, physics):
+    def __init__(self, image, x, y, tile_physics):
         """
         Initialization of all variables and Sprite of a tile.
 
@@ -30,7 +30,7 @@ class Tile(pygame.sprite.Sprite):
         image - name of tile image
         x - horizontal location
         y - vertical location
-        physics - physics type of tile
+        tile_physics - physics type of tile
 
         Raises
         ----------
@@ -44,7 +44,7 @@ class Tile(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load(image)
-        self.physics = physics
+        self.tile_physics = tile_physics
         self.x = x
         self.y = y
 
