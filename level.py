@@ -30,6 +30,9 @@ class Level():
     draw_level_surface():
         Draws the level surface on the window
 
+    get_tile():
+        Gets a tile object given an x,y value
+
     """
 
     def __init__(self, filename):
@@ -117,23 +120,56 @@ class Level():
         y = 0
 
         # the for loop will extend when we get all the tiles in.
-
         for row in level:
             x = 0
+            temp = []
             for tile in row:
-                if tile == 0:
-                    tiles.append(Tile('Ground image name here', x *
-                                      self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
-                elif tile == 1:
-                    tiles.append(Tile('Another tile image name here', x *
-                                      self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
+                if tile == '1':
+                    temp.append(Tile('ground.jpg', x *
+                                     self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
+                elif tile == '4':
+                    temp.append(Tile('Coin.jpeg', x *
+                                     self.tile_size, y * self.tile_size, Physics(0, 0, 0)))
+                else:
+                    temp.append(None)
+
                 x += 1
+
+            tiles.append(temp)
             y += 1
 
         w = x * self.tile_size
         h = y * self.tile_size
 
         return tiles, w, h
+
+    def get_tile(self, x, y):
+        """
+        Gets tile from self.tiles and returns it.
+
+        Parameters
+        ----------
+        x - x coord
+        y - y coord
+
+        Returns
+        ----------
+        found_tile - Tile object at (x,y), None otherwise
+
+        Authors
+        ----------
+        Jon O'Brien
+        """
+
+        found_tile = None
+
+        x = x // self.tile_size
+        y = y // self.tile_size
+
+        if self.tiles[x][y] is not None:
+            found_tile = self.tiles[x][y]
+
+        return found_tile
 
     def load_level_surface(self):
         """
@@ -151,8 +187,10 @@ class Level():
         Jon O'Brien
         """
 
-        for tile in self.tiles:
-            tile.draw_tile(self.level_surface)
+        for row in self.tiles:
+            for tile in row:
+                if tile is not None:
+                    tile.draw_tile(self.level_surface)
 
     def draw_level_surface(self, surface):
         """
