@@ -30,7 +30,7 @@ class Level():
     draw_level_surface():
         Draws the level surface on the window
 
-    get_tile():
+    get_position_tile():
         Gets a tile object given an x,y value
 
     """
@@ -143,34 +143,6 @@ class Level():
 
         return tiles, w, h
 
-    def get_tile(self, x, y):
-        """
-        Gets tile from self.tiles and returns it.
-
-        Parameters
-        ----------
-        x - x coord
-        y - y coord
-
-        Returns
-        ----------
-        found_tile - Tile object at (x,y), None otherwise
-
-        Authors
-        ----------
-        Jon O'Brien
-        """
-
-        found_tile = None
-
-        x = x // self.tile_size
-        y = y // self.tile_size
-
-        if self.tiles[x][y] is not None:
-            found_tile = self.tiles[x][y]
-
-        return found_tile
-
     def load_level_surface(self):
         """
         Draw level tiles onto the level surface.
@@ -230,5 +202,4 @@ class Level():
         ----------
         Branden Wheeler
         """
-        return self.tiles[x//self.tile_size][y//self.tile_size]
-
+        return self.tiles[y//self.tile_size][x//self.tile_size]
